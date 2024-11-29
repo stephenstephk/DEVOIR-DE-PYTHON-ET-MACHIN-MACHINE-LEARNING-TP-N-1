@@ -1,27 +1,31 @@
-def afficher_calendrier(nombre_jours, premier_jour):
-    jours_semaine = ["LUN", "MAR", "MER", "JEU", "VEN", "SAM", "DIM"]
+# Fonction pour afficher un calendrier
+def afficher_calendrier():
+    # Vérification du nombre de jours dans le mois
+    while True:
+        jours_dans_mois = int(input("Entrez le nombre de jours dans le mois (entre 28 et 31) : "))
+        if 28 <= jours_dans_mois <= 31:
+            break  # Si le nombre est valide, on sort de la boucle
+        print("Veuillez entrer un nombre entre 28 et 31 !")
 
-    # Afficher les en-têtes des jours
-    print(" ".join(jours_semaine))
+    # Vérification du premier jour
+    while True:
+        premier_jour = int(input("Entrez le numéro du premier jour (1 pour Lundi,..., 7 pour Dimanche) : "))
+        if 1 <= premier_jour <= 7:
+            break  # Si le numéro est valide, on sort de la boucle
+        print("Veuillez entrer un chiffre entre 1 et 7 !")
 
-    # Calculer l'indentation pour le premier jour
-    indentation = (premier_jour - 1) * 4  # Chaque jour prend 4 espaces
-    print(" " * indentation, end="")
+    # Affichage des en-têtes
+    print("\nLUN MAR MER JEU VEN SAM DIM")
 
-    # Afficher les jours du mois
-    for jour in range(1, nombre_jours + 1):
-        print(f"{jour:>3} ", end="")  # Chaque jour est aligné à droite sur 3 caractères
-        if (jour + premier_jour - 1) % 7 == 0:  # Passer à la ligne après DIM
+    # Espacement initial pour aligner le premier jour
+    for _ in range(premier_jour - 1):
+        print("    ", end="")
+
+    # Affichage des jours du mois
+    for jour in range(1, jours_dans_mois + 1):
+        print(f"{jour:>3} ", end="")
+        if (jour + premier_jour - 1) % 7 == 0:  # Retour à la ligne après dimanche
             print()
 
-# Entrée utilisateur
-if __name__ == "__main__":
-    print("Bienvenue dans le programme de calendrier !")
-    nombre_jours = int(input("Entrez le nombre de jours dans le mois : "))
-    premier_jour = int(input("Entrez le numéro du premier jour (1=LUN, 2=MAR, ..., 7=DIM) : "))
-
-    # Validation des entrées
-    if 28 <= nombre_jours <= 31 and 1 <= premier_jour <= 7:
-        afficher_calendrier(nombre_jours, premier_jour)
-    else:
-        print("Entrées invalides. Assurez-vous que le nombre de jours est entre 28 et 31 et que le premier jour est entre 1 et 7.")
+# Exécuter la fonction
+afficher_calendrier()
